@@ -12,6 +12,7 @@ export interface RequestRowProps {
 }
 
 export function RequestRow(props: RequestRowProps) {
+  const requestUrl = new URL(props.request.url);
   return (
     <div
       onClick={() => {
@@ -28,7 +29,10 @@ export function RequestRow(props: RequestRowProps) {
         {props.request.method}
       </div>
       <div className="p-2 ms-4 overflow-hidden text-ellipsis whitespace-nowrap select-none">
-        {props.request.url}
+        {requestUrl.hostname}
+      </div>
+      <div className="p-2 ms-4 overflow-hidden text-ellipsis whitespace-nowrap select-none">
+        {requestUrl.pathname}
       </div>
     </div>
   );
