@@ -17,7 +17,7 @@ const customRouter = function (req: any) {
 };
 const primaClient = new PrismaClient();
 
-const port: number = Number(process.env.PORT) || 8000;
+const port: number = Number(process.env.PROXY_PORT) || 8000;
 
 const proxy = createProxyMiddleware({
   target: "http://localhost:port",
