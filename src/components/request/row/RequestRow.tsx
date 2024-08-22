@@ -24,10 +24,10 @@ export function RequestRow(props: RequestRowProps) {
       id={props.request.id}
       className={`flex w-full ${props.selected ? "bg-stone-100" : "bg-white"} hover:bg-stone-100 cursor-pointer`}
     >
-      <div className={`p-2 method-${props.request.method}`}>
+      <div className={`p-2 select-none method-${props.request.method}`}>
         {props.request.method}
       </div>
-      <div className="p-2 ms-4 overflow-hidden text-ellipsis whitespace-nowrap">
+      <div className="p-2 ms-4 overflow-hidden text-ellipsis whitespace-nowrap select-none">
         {props.request.url}
       </div>
     </div>

@@ -19,7 +19,7 @@ export default function Home() {
   return (
     <main className="flex w-full bg-stone-200">
       <div
-        className={`bg-stone-300 hidden flex fixed p-1 ${openedRequest ? "w-[50%]" : "w-[100%]"}`}
+        className={`bg-stone-300 select-none hidden flex fixed p-1 ${openedRequest ? "w-[50%]" : "w-[100%]"}`}
       >
         <div className="p-2 cursor-pointer flex">^</div>
         <div className="p-2 cursor-pointer flex">+1</div>
@@ -52,7 +52,7 @@ export default function Home() {
                   )}
                 </div>
                 <div
-                  className="p-2 cursor-pointer flex items-center"
+                  className="p-2 cursor-pointer select-none flex items-center"
                   onClick={() => setOpenedRequest(null)}
                 >
                   x
@@ -68,7 +68,7 @@ export default function Home() {
               </div>
             </div>
             <div className="bg-blue-300 p-2 gap-2 flex flex-wrap">
-              <div className="w-full font-bold">Запрос</div>
+              <div className="w-full font-bold select-none">Запрос</div>
               <pre className="w-full">
                 <JsonPresentation
                   value={(() => {
@@ -110,7 +110,7 @@ export default function Home() {
               )}
             </div>
             <div className=" bg-blue-200 p-2 gap-2 flex flex-wrap">
-              <div className="w-full font-bold">Ответ</div>
+              <div className="w-full font-bold select-none">Ответ</div>
               <pre className="w-full">
                 <JsonPresentation
                   value={openedRequest.response?.headers}
