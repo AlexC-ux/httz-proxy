@@ -10,7 +10,9 @@ export function JsonPresentation(props: {
     try {
       valueObject = JSON.parse(props.value);
     } catch (error) {
-      valueObject[props.name ?? "root"] = props.value;
+      if (props.value) {
+        valueObject[props.name ?? "root"] = props.value;
+      }
     }
   }
   return (
