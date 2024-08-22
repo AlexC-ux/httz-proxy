@@ -1,17 +1,26 @@
 import { Prisma } from "@prisma/client";
+import { Dispatch, SetStateAction } from "react";
 
 export interface RequestRowProps {
   selected?: boolean;
   request: Prisma.requestGetPayload<{ include: { response: true } }>;
-  openHandler: (
-    req: Prisma.requestGetPayload<{ include: { response: true } }>
-  ) => void;
+  openHandler: Dispatch<
+    SetStateAction<Prisma.requestGetPayload<{
+      include: { response: true };
+    }> | null>
+  >;
 }
 
 export function RequestRow(props: RequestRowProps) {
   return (
     <div
-      onClick={() => props.openHandler(props.request)}
+      onClick={() => {
+        if (props.selected) {
+          props.openHandler(null);
+        } else {
+          props.openHandler(props.request);
+        }
+      }}
       id={props.request.id}
       className={`flex w-full ${props.selected ? "bg-stone-100" : "bg-white"} hover:bg-stone-100 cursor-pointer`}
     >
