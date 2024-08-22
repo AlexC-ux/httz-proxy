@@ -11,3 +11,4 @@
 - cd httz-proxy
 - npm i
 - npm run start
+- Открыть в браузере http://localhost:3000/
