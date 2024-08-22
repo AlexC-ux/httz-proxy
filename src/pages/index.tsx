@@ -19,11 +19,12 @@ export default function Home() {
   return (
     <main className="flex w-full">
       <div
-        className={`flex order-1 flex-col ${openedRequest ? "w-[50%]" : "w-[100%]"}`}
+        className={`flex order-1 gap-1 bg-stone-200 flex-col ${openedRequest ? "w-[50%]" : "w-[100%]"}`}
       >
         {requestsSwr.data?.requests.map((req) => {
           return (
             <RequestRow
+              selected={req.id == openedRequest?.id}
               key={req.id}
               request={req}
               openHandler={setOpenedRequest}
@@ -31,9 +32,11 @@ export default function Home() {
           );
         })}
       </div>
-      <div className="flex order-2">
+      <div
+        className={` relative flex order-2 border-s-2 border-stone-200 ${openedRequest ? "w-[50%]" : "w-[0%]"}`}
+      >
         {openedRequest && (
-          <div className="flex flex-col fixed max-h-screen overflow-y-auto">
+          <div className="flex flex-col fixed max-h-screen overflow-y-auto w-[50%]">
             <div className="flex w-100 flex-col bg-zinc-100">
               <div className="text-gray-500 text-center w-100 py-2">
                 {dayjs(openedRequest.created_at).format("DD.MM.YYYY HH:mm:ss")}
@@ -42,59 +45,67 @@ export default function Home() {
                 <div className={`p-1 method-${openedRequest.method}`}>
                   {openedRequest.method}
                 </div>
-                <div className="ms-3 p-1 break-all">{openedRequest.url}</div>
+                <div className="ms-3 p-1 break-all w-full">
+                  {openedRequest.url}
+                </div>
               </div>
-              <pre className="">
+            </div>
+            <div className="bg-blue-300 p-2 gap-2 flex flex-wrap">
+              <div className="w-full font-bold">Запрос</div>
+              <pre className="w-full">
                 <JsonPresentation
                   value={(() => {
                     const search = new URL(openedRequest.url).search.substring(
                       1
                     );
-                    return (
-                      '{"' +
-                      decodeURI(search)
-                        .replace(/"/g, '\\"')
-                        .replace(/&/g, '","')
-                        .replace(/=/g, '":"') +
-                      '"}'
-                    );
+                    if (search) {
+                      return (
+                        '{"' +
+                        decodeURI(search)
+                          .replace(/"/g, '\\"')
+                          .replace(/&/g, '","')
+                          .replace(/=/g, '":"') +
+                        '"}'
+                      );
+                    } else {
+                      return {};
+                    }
                   })()}
                   name="params"
-                  title="Query запроса"
+                  title="Параметры"
                 />
               </pre>
-            </div>
-            <div className="bg-blue-100 p-2">
-              <pre>
+              <pre className="w-full">
                 <JsonPresentation
                   value={openedRequest.headers}
                   name="headers"
-                  title="Заголовки запроса"
+                  title="Заголовки"
                 />
               </pre>
               {openedRequest.method.toLowerCase() != "get" && (
-                <pre>
+                <pre className="w-full">
                   <JsonPresentation
                     value={openedRequest.payload}
                     name="payload"
-                    title="Тело запроса"
+                    title="Содержимое"
                   />
                 </pre>
               )}
             </div>
-            <div className="bg-cyan-100">
-              <pre>
+            <div className=" bg-blue-200 p-2 gap-2 flex flex-wrap">
+              <div className="w-full font-bold">Ответ</div>
+              <pre className="w-full">
                 <JsonPresentation
                   value={openedRequest.response?.headers}
                   name="headers"
-                  title="Заголовки ответа"
+                  title="Заголовки"
                 />
               </pre>
-              <pre>
+              <pre className="w-full">
                 <JsonPresentation
                   value={openedRequest.response?.payload}
                   name="payload"
-                  title="Тело ответа"
+                  title="Содержимое"
                 />
               </pre>
             </div>
