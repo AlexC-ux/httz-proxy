@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.method-GET{
+    background-color: rgb(107, 80, 55);
+    color:white;
+}
+
+.method-POST{
+    background-color: rgb(83, 134, 128);
+    color:white;
+}
+
+pre{
+    white-space: pre-wrap;
+}

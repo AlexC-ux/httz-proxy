@@ -3,7 +3,7 @@ import axios from "axios";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 export type GetRequestsResponseData = {
-  requests: Prisma.requestGetPayload<{ include: { response: false } }>[];
+  requests: Prisma.requestGetPayload<{ include: { response: true } }>[];
   totalCount: number;
   page: number;
   pageSize: number;
@@ -16,7 +16,7 @@ export default async function handler(
   const page = req.query.page ? Number(req.query.page) : 1;
   const pageSize = req.query.pageSize ? Number(req.query.pageSize) : 100;
   const prisma = new PrismaClient();
-  const requests: Prisma.requestGetPayload<{ include: { response: false } }>[] =
+  const requests: Prisma.requestGetPayload<{ include: { response: true } }>[] =
     await prisma.request.findMany({
       orderBy: {
         created_at: "desc",
