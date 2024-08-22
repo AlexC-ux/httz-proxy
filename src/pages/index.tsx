@@ -43,7 +43,10 @@ export default function Home() {
         className={` relative flex order-2 border-s-2 border-stone-200 ${openedRequest ? "w-[50%]" : "w-[0%]"}`}
       >
         {openedRequest && (
-          <div className="flex flex-col fixed max-h-screen overflow-y-auto w-[50%]">
+          <div
+            key={`erq-${openedRequest.id}`}
+            className="flex flex-col fixed max-h-screen overflow-y-auto w-[50%]"
+          >
             <div className="flex w-100 flex-col bg-zinc-100">
               <div className="text-gray-500 text-center w-100 flex justify-between">
                 <div className="flex items-center px-1">
