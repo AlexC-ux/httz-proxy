@@ -17,9 +17,16 @@ export default function Home() {
     include: { response: true };
   }> | null>(null);
   return (
-    <main className="flex w-full">
+    <main className="flex w-full bg-stone-200">
       <div
-        className={`flex order-1 gap-1 bg-stone-200 flex-col ${openedRequest ? "w-[50%]" : "w-[100%]"}`}
+        className={`bg-stone-300 hidden flex fixed p-1 ${openedRequest ? "w-[50%]" : "w-[100%]"}`}
+      >
+        <div className="p-2 cursor-pointer flex">^</div>
+        <div className="p-2 cursor-pointer flex">+1</div>
+        <div className="p-2 cursor-pointer flex">+2</div>
+      </div>
+      <div
+        className={`mt-[48px] flex order-1 gap-1 bg-stone-200 flex-col ${openedRequest ? "w-[50%]" : "w-[100%]"}`}
       >
         {requestsSwr.data?.requests.map((req) => {
           return (
@@ -38,8 +45,18 @@ export default function Home() {
         {openedRequest && (
           <div className="flex flex-col fixed max-h-screen overflow-y-auto w-[50%]">
             <div className="flex w-100 flex-col bg-zinc-100">
-              <div className="text-gray-500 text-center w-100 py-2">
-                {dayjs(openedRequest.created_at).format("DD.MM.YYYY HH:mm:ss")}
+              <div className="text-gray-500 text-center w-100 flex justify-between">
+                <div className="flex items-center px-1">
+                  {dayjs(openedRequest.created_at).format(
+                    "DD.MM.YYYY HH:mm:ss"
+                  )}
+                </div>
+                <div
+                  className="p-2 cursor-pointer flex items-center"
+                  onClick={() => setOpenedRequest(null)}
+                >
+                  x
+                </div>
               </div>
               <div className="flex flex-row">
                 <div className={`p-1 method-${openedRequest.method}`}>
