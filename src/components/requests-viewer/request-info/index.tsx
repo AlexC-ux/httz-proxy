@@ -3,6 +3,7 @@ import { Prisma } from "@prisma/client";
 import dayjs from "dayjs";
 import { Dispatch, SetStateAction } from "react";
 import "./request-info.styles.scss";
+import CloseIcon from '@mui/icons-material/Close';
 
 export function RequestInfo(props: {
     openedRequest: Prisma.requestGetPayload<{ include: { response: true } }> | null,
@@ -26,7 +27,7 @@ export function RequestInfo(props: {
                             className="p-2 cursor-pointer select-none flex items-center"
                             onClick={() => props.setopenedRequest(null)}
                         >
-                            x
+                            <CloseIcon />
                         </div>
                     </div>
                     <div className="flex relative flex-row">

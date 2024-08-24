@@ -1,12 +1,11 @@
 import { jsonFetcher } from "@/fetcher/jsonFetcher";
 import { GetRequestsResponseData } from "@/pages/api/requests";
 import { Prisma } from "@prisma/client";
-import dayjs from "dayjs";
 import { useState } from "react";
 import useSWR from "swr";
-import { JsonPresentation } from "../json-presentation";
 import { RequestRow } from "../request/row/RequestRow";
 import { RequestInfo } from "./request-info";
+import { Header } from "../navigation/header";
 
 export function RequestViewer() {
     const requestsSwr = useSWR<GetRequestsResponseData, any>(
@@ -18,6 +17,7 @@ export function RequestViewer() {
     }> | null>(null);
     return (<>
         <div className={`h-screen w-full ${openedRequest ? "hidden md:block md:max-w-[50vw]" : ""}`}>
+            <Header />
             <div
                 className={`flex order-1 gap-1 bg-stone-200 flex-col overflow-y-auto overflow-x-hidden`}
             >
