@@ -13,10 +13,10 @@ export function RequestInfo(props: {
         {props.openedRequest && (
             <div
                 key={`erq-${props.openedRequest.id}`}
-                className="flex flex-col fixed max-h-screen h-screen overflow-y-auto w-[50%]"
+                className="block w-full h-screen overflow-y-auto"
             >
-                <div className="flex w-100 flex-col bg-zinc-100">
-                    <div className="text-gray-500 text-center w-100 flex justify-between">
+                <div className="flex w-full flex-col bg-zinc-100">
+                    <div className="text-gray-500 text-center w-full flex justify-between">
                         <div className="flex items-center px-1">
                             {dayjs(props.openedRequest.created_at).format(
                                 "DD.MM.YYYY HH:mm:ss"
